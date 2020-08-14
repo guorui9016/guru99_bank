@@ -1,14 +1,18 @@
 package pagerepository;
 
+import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import templet.PageTemplet;
 import util.Constants;
+import util.JsonTestDataLoader;
 import util.Util;
 
 public class LoginPage extends PageTemplet {
-    WebDriver driver;
+    private WebDriver driver;
+    private String expectTitle = "Guru99 Bank Home Page";
     private By userID = new By.ByName("uid");
     private By password = new By.ByName("password");
     private By btnLogin = new By.ByName("btnLogin");
@@ -33,9 +37,16 @@ public class LoginPage extends PageTemplet {
         driver.findElement(btnLogin).click();
     }
 
+    public void checkTitle() {
+        Assert.assertEquals(driver.getTitle(), expectTitle);
+    }
+
     public void autoLogin() {
-        inputUserID(Constants.USER_ID);
-        inputPassword(Constants.PASSWORD);
+        JsonObject account = JsonTestDataLoader.getJsonObject("account");
+
+        inputUserID(account.get("userId").getAsString());
+        inputPassword(account.get("password").getAsString());
+
         clickSubmit();
     }
 }

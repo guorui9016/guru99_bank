@@ -55,7 +55,6 @@ public class TestCaseTemplet {
         logger.info("Login system");
     }
 
-    @AfterClass
     public void teardown() {
         driver.quit();
         logger.info("Quit driver");

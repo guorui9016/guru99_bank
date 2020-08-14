@@ -1,0 +1,1 @@
+{"account":[{"userId":"mngr277208","password":"@Test002"}],"sm1_IncorrectOldPassword":[{"description":"Enter incorrect Old Password","oldPassword":"@Test","newPassword":"@Test002","confirmPassword":"@Test002"}],"sm2_CorrectOldPassword":[{"description":"Enter correct Old Password","oldPassword":"@Test002","newPassword":"@Test001","confirmPassword":"@Test001"}]}

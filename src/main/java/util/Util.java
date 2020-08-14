@@ -39,7 +39,7 @@ public class Util {
             e.printStackTrace();
             logger.error(e);
         }
-        return "screenshot\\" + fileName + ".png";
+        return Constants.SCREEN_SHOT_RETURN_PATH + fileName + ".png";
     }
 
     /**
