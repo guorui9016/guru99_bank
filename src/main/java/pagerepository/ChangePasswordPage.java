@@ -6,6 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import templet.PageTemplet;
 
+/**
+ * @author Rui Guo
+ *
+ * Guru99 bank demo: change password object class
+ *
+ */
+
 public class ChangePasswordPage extends PageTemplet {
     //init variable
     private WebDriver driver;
@@ -40,22 +47,36 @@ public class ChangePasswordPage extends PageTemplet {
         driver.findElement(submit).click();
     }
 
-    public void checkCorrectPwdMsg() {
-        checkAlertMessage(expectCorrectMsg);
+    /**
+     * Verify the alert message after use correct passwords
+     */
+    public void verifyCorrectPwdMsg() {
+        verifyAlertMessage(expectCorrectMsg);
     }
 
-    public void checkIncorrectPwdMsg() {
-        checkAlertMessage(expectIncorrectMsg);
+    /**
+     * Verify the alert message after use incorrect passwords
+     */
+    public void verifyIncorrectPwdMsg() {
+        verifyAlertMessage(expectIncorrectMsg);
     }
 
-    private void checkAlertMessage(String expectMessage) {
+    /**
+     * Compare the expect and actual alert message
+     *
+     * @param expectMessage
+     */
+    private void verifyAlertMessage(String expectMessage) {
         Alert alert = driver.switchTo().alert();
         String text = alert.getText();
         alert.accept();
         Assert.assertEquals(text, expectMessage);
     }
 
-    public void checkTitle() {
+    /**
+     * Verify the page title
+     */
+    public void verifyTitle() {
         String text = driver.findElement(title).getText();
         Assert.assertEquals(text, expectHeader);
     }

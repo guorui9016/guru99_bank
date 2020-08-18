@@ -19,14 +19,13 @@ import java.util.Map;
 
 /**
  * @author Rui Guo
- * <p>
+ *
  * Loading data utility tool
  */
 
 public class JsonTestDataLoader {
     private static Logger logger;
     private static JsonObject jsonObject;
-
     static {
         try {
             jsonObject = JsonParser.parseReader(new FileReader(Constants.JSON_TEST_DATA_PATH)).getAsJsonObject();
@@ -60,6 +59,12 @@ public class JsonTestDataLoader {
         return (JsonObject)jsonArray.get(0);
     }
 
+    /**
+     * Update the value and wirte to Json file.
+     *
+     * @param objectName
+     * @param map
+     */
     public static void updataJsonObject(String objectName, HashMap<String, String> map) {
         JsonArray jsonArray = jsonObject.getAsJsonArray(objectName);
         JsonObject update = (JsonObject) jsonArray.get(0);

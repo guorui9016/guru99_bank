@@ -6,7 +6,8 @@
     </listeners>
     <test verbose="2" preserve-order="true" name="D:/workplace/Selenium/guru99_bank">
         <classes>
-            <class name="Manager.ChangePasswordTest"></class>
+            <class name="Manager.TC_ChangePassword"></class>
+            <class name="Manager.TC_NewCustomer"></class>
         </classes>
     </test>
 </suite>

@@ -1,1 +1,44 @@
-{"account":[{"userId":"mngr277208","password":"@Test002"}],"sm1_IncorrectOldPassword":[{"description":"Enter incorrect Old Password","oldPassword":"@Test","newPassword":"@Test002","confirmPassword":"@Test002"}],"sm2_CorrectOldPassword":[{"description":"Enter correct Old Password","oldPassword":"@Test002","newPassword":"@Test001","confirmPassword":"@Test001"}]}
+{
+  "account": [
+    {
+      "userId": "mngr277208",
+      "password": "@Test002"
+    }
+  ],
+  "sm1_IncorrectOldPassword": [
+    {
+      "description": "Enter incorrect Old Password",
+      "oldPassword": "@Test",
+      "newPassword": "@Test002",
+      "confirmPassword": "@Test002"
+    }
+  ],
+  "sm2_CorrectOldPassword": [
+    {
+      "description": "Enter correct Old Password",
+      "oldPassword": "@Test002",
+      "newPassword": "@Test001",
+      "confirmPassword": "@Test001"
+    }
+  ],
+  "sm4_AddNewCustomer": [
+    {
+      "customerName": "Virendra",
+      "gender": "female",
+      "dob": "04112013",
+      "verifyDob": "2013-11-04",
+      "address": "Jamnagar",
+      "city": "Jamnagar",
+      "state": "Gujarat",
+      "pin": "567321",
+      "mobileNum": "8000439024",
+      "email": "Virendra999@gmail.com",
+      "pwd": "123456"
+    }
+  ],
+  "customer": [
+    {
+      "customerId": ""
+    }
+  ]
+}

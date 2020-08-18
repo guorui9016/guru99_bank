@@ -3,12 +3,15 @@ package pagerepository;
 import com.google.gson.JsonObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import templet.PageTemplet;
-import util.Constants;
 import util.JsonTestDataLoader;
-import util.Util;
+
+/**
+ * @author Rui Guo
+ *
+ * Guru99 bank demo: Login page object class
+ */
 
 public class LoginPage extends PageTemplet {
     private WebDriver driver;
@@ -25,6 +28,17 @@ public class LoginPage extends PageTemplet {
         this.driver = driver;
     }
 
+    /**
+     * Load account info from Json file then automatic login system.
+     */
+    public void autoLogin() {
+        JsonObject account = JsonTestDataLoader.getJsonObject("account");
+
+        inputUserID(account.get("userId").getAsString());
+        inputPassword(account.get("password").getAsString());
+        clickSubmit();
+    }
+
     public void inputUserID(String id) {
         sendKey(driver.findElement(userID),id);
     }
@@ -39,14 +53,5 @@ public class LoginPage extends PageTemplet {
 
     public void checkTitle() {
         Assert.assertEquals(driver.getTitle(), expectTitle);
-    }
-
-    public void autoLogin() {
-        JsonObject account = JsonTestDataLoader.getJsonObject("account");
-
-        inputUserID(account.get("userId").getAsString());
-        inputPassword(account.get("password").getAsString());
-
-        clickSubmit();
     }
 }

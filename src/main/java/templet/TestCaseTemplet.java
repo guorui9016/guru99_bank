@@ -5,12 +5,16 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import pagerepository.LoginPage;
 import util.Constants;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author Rui Guo
+ *
+ * Guru99 bank: base test case class
+ */
 public class TestCaseTemplet {
 
     private Logger logger = LogManager.getLogger(TestCaseTemplet.class.getName());
@@ -18,6 +22,10 @@ public class TestCaseTemplet {
 
     public TestCaseTemplet() {
         initializeDriver();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
     /**
@@ -39,11 +47,6 @@ public class TestCaseTemplet {
         }
     }
 
-
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     /**
      * Login system before start test
      */
@@ -55,8 +58,6 @@ public class TestCaseTemplet {
         logger.info("Login system");
     }
 
-    public void teardown() {
-        driver.quit();
-        logger.info("Quit driver");
-    }
+
+
 }
