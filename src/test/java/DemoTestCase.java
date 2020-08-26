@@ -1,17 +1,17 @@
-import util.JsonTestDataLoader;
+import pagerepository.LoginPage;
+import util.JsonDataLoader;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class DemoTestCase{
     public static void main(String[] args) {
-        HashMap<String, String> test = new HashMap();
-        test.put("oldPassword","@Test001");
-        test.put("newPassword","@Test002");
-        test.put("confirmPassword","@Test002");
+        LocalDate date = LocalDate.now();
 
-        JsonTestDataLoader.updataJsonObject("sm2_CorrectOldPassword", test);
-
+        System.out.println(date.toString());
     }
+
 
 }
 

@@ -1,0 +1,19 @@
+{
+  "ManagerHomePage": {
+    "expectTitle": "Guru99 Bank Manager HomePage"
+  },
+  "ChangePasswordPage": {
+    "expectHeader": "Change Password",
+    "expectIncorrectMsg": "Old Password is incorrect",
+    "expectCorrectMsg": "Password is Changed"
+  },
+  "LoginPage": {
+    "expectTitle": "Guru99 Bank Home Page"
+  },
+  "NewCustomerPage": {
+    "existAccountErrorMsg": "Email Address Already Exist !!"
+  },
+  "CustomerRegistrationPage": {
+    "expectTitle": "Guru99 Bank Customer Registration Page"
+  }
+}

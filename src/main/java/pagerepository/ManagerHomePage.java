@@ -1,11 +1,14 @@
 package pagerepository;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import templet.PageTemplet;
+import util.JsonDataLoader;
 
 /**
  * @author Rui Guo
@@ -13,21 +16,30 @@ import templet.PageTemplet;
  * Guru99 bank demo: Home page object class
  *
  */
-
 public class ManagerHomePage extends PageTemplet {
-    //init variable
-    private WebDriver driver;
-    private String expectTitle = "Guru99 Bank Manager ManagerHomePage";
-    private By changePasswordLink = new By.ByCssSelector(".menusubnav > li:nth-child(11) > a");
-    private By newCustomerLikn = new By.ByCssSelector(".menusubnav > li:nth-child(2) > a");
-    private By managerID = new By.ByCssSelector(".heading3 td");
+    //WebElements
+    @FindBy(css = ".menusubnav > li:nth-child(11) > a")
+    @CacheLookup
+    private WebElement changePasswordLink;
+
+    @FindBy(css = ".heading3 td")
+    @CacheLookup
+    private WebElement managerID;
+
+    @FindBy(css = ".menusubnav > li:nth-child(2) > a")
+    @CacheLookup
+    private WebElement newCustomerLink;
+
+    @FindBy(css = ".menusubnav li:nth-child(5) > a:nth-child(1)")
+    @CacheLookup
+    private WebElement newAccountLink;
 
     public ManagerHomePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
+    public ManagerHomePage(WebDriver driver, String expTitle) {
+        super(driver, expTitle);
     }
 
     /**
@@ -36,22 +48,27 @@ public class ManagerHomePage extends PageTemplet {
      * @return
      */
     public ChangePasswordPage navChangePasswordLink() {
-        driver.findElement(changePasswordLink).click();
+        changePasswordLink.click();
         return new ChangePasswordPage(driver);
     }
 
-    public AddNewCustomerPage navNewCustomerLink() {
-        driver.findElement(newCustomerLikn).click();
-        return new AddNewCustomerPage(driver);
+    public NewCustomerPage navNewCustomerLink() {
+        newCustomerLink.click();
+        return new NewCustomerPage(driver);
+    }
+
+    public NewAccountPage navNewAccountLink() {
+        newAccountLink.click();
+        return new NewAccountPage(driver);
     }
 
     /**
-     *  verifyTitle method to verify page title
+     *  verifyHeader method to verify page title
      */
     public void verifyTitle() {
         WebDriverWait wait = new WebDriverWait(driver,10);
         wait.until(ExpectedConditions.titleContains("Manager"));
-        Assert.assertEquals(driver.getTitle(), expectTitle);
+        Assert.assertEquals(driver.getTitle(), JsonDataLoader.getExpectContent(this.getClass(), "expectTitle"));
     }
 
     /**
@@ -60,6 +77,6 @@ public class ManagerHomePage extends PageTemplet {
      * @param userID
      */
     public void verifyManagerID(String userID) {
-        Assert.assertEquals(driver.findElement(managerID).getText(), userID);
+        Assert.assertEquals(managerID.getText(), userID);
     }
 }

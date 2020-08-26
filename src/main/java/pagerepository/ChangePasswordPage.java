@@ -1,10 +1,13 @@
 package pagerepository;
 
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import templet.PageTemplet;
+import util.JsonDataLoader;
 
 /**
  * @author Rui Guo
@@ -12,25 +15,35 @@ import templet.PageTemplet;
  * Guru99 bank demo: change password object class
  *
  */
-
 public class ChangePasswordPage extends PageTemplet {
-    //init variable
-    private WebDriver driver;
-    private String expectHeader = "Change Password";
-    private String expectIncorrectMsg = "Old Password is incorrect";
-    private String expectCorrectMsg = "Password is Changed";
 
-    private By oldPassword = new By.ByName("oldpassword");
-    private By newPassword = new By.ByName("newpassword");
-    private By confPassword = new By.ByName("confirmpassword");
-    private By submit = new By.ByName("sub");
-    private By title = new By.ByClassName("heading3");
+    //init webElement
+    @FindBy(name = "oldpassword")
+    @CacheLookup
+    private WebElement weOldPassword;
+
+    @FindBy(name = "newpassword")
+    @CacheLookup
+    private WebElement weNewpassword;
+
+    @FindBy(name = "confirmpassword")
+    @CacheLookup
+    private WebElement weConfirmpassword;
+
+    @FindBy(name = "sub")
+    @CacheLookup
+    private WebElement weSubmit;
+
+    @FindBy(className = "heading3")
+    @CacheLookup
+    private WebElement weTitle;
 
     public ChangePasswordPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
+
+    public ChangePasswordPage(WebDriver driver, String expTitle) {
+        super(driver, expTitle);
     }
 
     /**
@@ -41,24 +54,10 @@ public class ChangePasswordPage extends PageTemplet {
      * @param confPwd
      */
     public void changePassword(String oldPwd, String newPwd, String confPwd) {
-        sendKey(driver.findElement(oldPassword), oldPwd);
-        sendKey(driver.findElement(newPassword), newPwd);
-        sendKey(driver.findElement(confPassword), confPwd);
-        driver.findElement(submit).click();
-    }
-
-    /**
-     * Verify the alert message after use correct passwords
-     */
-    public void verifyCorrectPwdMsg() {
-        verifyAlertMessage(expectCorrectMsg);
-    }
-
-    /**
-     * Verify the alert message after use incorrect passwords
-     */
-    public void verifyIncorrectPwdMsg() {
-        verifyAlertMessage(expectIncorrectMsg);
+        sendKey(weOldPassword, oldPwd);
+        sendKey(weNewpassword, newPwd);
+        sendKey(weConfirmpassword, confPwd);
+        weSubmit.click();
     }
 
     /**
@@ -66,7 +65,7 @@ public class ChangePasswordPage extends PageTemplet {
      *
      * @param expectMessage
      */
-    private void verifyAlertMessage(String expectMessage) {
+    public void verifyAlert(String expectMessage) {
         Alert alert = driver.switchTo().alert();
         String text = alert.getText();
         alert.accept();
@@ -76,8 +75,8 @@ public class ChangePasswordPage extends PageTemplet {
     /**
      * Verify the page title
      */
-    public void verifyTitle() {
-        String text = driver.findElement(title).getText();
-        Assert.assertEquals(text, expectHeader);
+    public void verifyHeader() {
+        String text = weTitle.getText();
+        Assert.assertEquals(text, JsonDataLoader.getExpectContent(this.getClass(),"expectHeader"));
     }
 }
