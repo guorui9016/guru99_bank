@@ -1,3 +1,4 @@
-**/logs
-**/report
-**/target
+logs/
+report/
+target/
+.idea/
