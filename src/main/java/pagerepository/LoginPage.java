@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.json.Json;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -41,8 +42,7 @@ public class LoginPage extends PageTemplet {
      * Load account info from Json file then automatic login system.
      */
     public ManagerHomePage autoLogin() {
-        JsonArray jsonArray = JsonDataLoader.getTestDataArray("account");
-        JsonObject account = (JsonObject) jsonArray.get(0);
+        JsonObject account = JsonDataLoader.getDataObject("account");
         inputUserID(account.get("userId").getAsString());
         inputPassword(account.get("password").getAsString());
         clickSubmit();

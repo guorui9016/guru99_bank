@@ -18,7 +18,7 @@ import java.util.Map;
  * Loading data utility tool
  */
 public class JsonDataLoader {
-    private static Logger logger;
+    private static Logger logger = LogManager.getLogger(JsonDataLoader.class);
     private static JsonObject testData;
     private static JsonObject expectContext;
     private static Object locker = new Object();
@@ -41,8 +41,17 @@ public class JsonDataLoader {
      */
     //Todo: Need do first -- supdate the load data method becasue no JsonArray right now.
     @DataProvider(name = "testData")
-    public static Object[][] loadTestData(Method method) {
-        logger = LogManager.getLogger(JsonDataLoader.class);
+    public static Object[][] loadData(Method method) {
+        String methodName = method.getName();
+        JsonObject jsonObject = testData.getAsJsonObject(methodName);
+        Object[][] testData = new Object[1][1];
+        testData[0][0] = jsonObject;
+        logger.info("Load test data from json file to method: " + methodName);
+        return testData;
+    }
+
+    @DataProvider(name = "testDataArray")
+    public static Object[][] loadDataArray(Method method) {
         String methodName = method.getName();
         JsonArray jsonArray = testData.getAsJsonArray(methodName);
         Object[][] testDataList = new Object[jsonArray.size()][1];
@@ -53,7 +62,7 @@ public class JsonDataLoader {
         return testDataList;
     }
 
-    public static JsonArray getTestDataArray(String objectName) {
+    public static JsonArray getDataArray(String objectName) {
         return testData.getAsJsonArray(objectName);
     }
 
@@ -78,14 +87,15 @@ public class JsonDataLoader {
                 Writer out = new FileWriter(Constants.JSON_TEST_DATA_PATH);
                 out.write(testData.toString());
                 out.flush();
+                logger.info("Update data to Json File");
             } catch (IOException e) {
                 e.printStackTrace();
+                logger.error(e);
             }
         }
     }
 
     /**
-     *
      *  Update value of JsonObject and write to the file.
      *
      * @param target The JsonObject that need to be update
@@ -100,12 +110,45 @@ public class JsonDataLoader {
                 Writer out = new FileWriter(Constants.JSON_TEST_DATA_PATH);
                 out.write(testData.toString());
                 out.flush();
+                logger.info("Update data to Json File");
             } catch (IOException e) {
                 e.printStackTrace();
+                logger.error(e);
             }
         }
     }
 
+    /**
+     *  Update value of JsonObject and write to the file.
+     *
+     * @param ObjectName The Object name that need to be update
+     * @param map The new value.
+     */
+        public static void updateDataToFile(String ObjectName, HashMap<String, String> map) {
+            JsonObject target = getDataObject(ObjectName);
+            synchronized (locker) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                target.addProperty(entry.getKey(), entry.getValue());
+            }
+            try {
+                Writer out = new FileWriter(Constants.JSON_TEST_DATA_PATH);
+                out.write(testData.toString());
+                out.flush();
+                logger.info("Update data to Json File");
+            } catch (IOException e) {
+                e.printStackTrace();
+                logger.error(e);
+            }
+        }
+    }
+
+    /**
+     * get the expect string from json file.
+     *
+     * @param clazz
+     * @param key
+     * @return
+     */
     public static String getExpectContent(Class clazz, String key) {
         JsonObject jsonObject = expectContext.getAsJsonObject(clazz.getSimpleName());
         return jsonObject.get(key).getAsString();

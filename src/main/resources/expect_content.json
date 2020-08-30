@@ -15,5 +15,30 @@
   },
   "CustomerRegistrationPage": {
     "expectTitle": "Guru99 Bank Customer Registration Page"
+  },
+  "AccountRegPage": {
+    "expectTitle": "Gtpl Bank Customer Registration Page"
+  },
+  "DeleteCustomerPage": {
+    "expectTitle": "Guru99 Bank Delete Customer Page",
+    "expectNoticeMsg": "Do you really want to delete this Customer?",
+    "expectDelErrorMsg": "Customer could not be deleted!!. First delete all accounts of this customer then delete the customer"
+  },
+  "DeleteAccountPage": {
+    "expectTitle": "Guru99 Bank Delete Account Page",
+    "expectNoticeMsg": "Do you really want to delete this Account?",
+    "expectDelSuccMsg": "Account Deleted Sucessfully"
+  },
+  "BalanceEnquiryPage": {
+    "expectTitle": "Guru99 Bank Balance Enquiry Page",
+    "expectIncorrectAccountMsg": "Account does not exist"
+  },
+  "MiniStatementPage": {
+    "expectTitle": "Guru99 Bank Mini Statement Page",
+    "expectIncorrectAccountMsg": "Account does not exist"
+  },
+  "CustomizedStatementPage": {
+    "expectTitle": "Guru99 Bank Statement Page",
+    "expectIncorrectAccountMsg": "Account does not exist"
   }
 }

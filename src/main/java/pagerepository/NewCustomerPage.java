@@ -90,7 +90,7 @@ public class NewCustomerPage extends PageTemplet {
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB).perform();
         try {
-            Thread.sleep(1000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

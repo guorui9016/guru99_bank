@@ -24,6 +24,6 @@ public class Constants {
     public static final String JSON_EXPECT_CONTENT_PATH = "src\\main\\resources\\expect_content.json";
 
     //Expected contents
-    public static final String CUSTOMER_REG_PAGE_TITLE = " Guru99 Bank Customer Registration Page ";
+    public static final String EXPECT_PAGE_TITLE = "expectTitle";
 
 }

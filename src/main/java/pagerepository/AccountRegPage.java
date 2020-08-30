@@ -24,31 +24,24 @@ public class AccountRegPage extends PageTemplet {
     Logger logger = LogManager.getLogger(AccountRegPage.class);
 
     @FindBy(css = "#account tr:nth-child(4) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weAccountId;
 
     @FindBy(css = "#account tr:nth-child(5) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weCustomerId;
 
     @FindBy(css = "#account tr:nth-child(6) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weCustomerName;
 
     @FindBy(css = "#account tr:nth-child(7) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weEmail;
 
     @FindBy(css = "#account tr:nth-child(8) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weAccountType;
 
     @FindBy(css = "#account tr:nth-child(9) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weDoo; //Date of Opening
 
     @FindBy(css = "#account tr:nth-child(10) > td:nth-child(2)")
-    @CacheLookup
     private WebElement weCurrAmount;
 
     public AccountRegPage(WebDriver driver) {
@@ -59,7 +52,11 @@ public class AccountRegPage extends PageTemplet {
         super(driver, expTitle);
     }
 
-    //Todo check all infomation
+    /**
+     * Check the account details after add new account
+     * @param customerId
+     * @param testdata
+     */
     public void verifyAccount(String customerId, JsonObject testdata) {
         //get information from the page
         String customerName = testdata.get("customerName").getAsString();
@@ -79,6 +76,13 @@ public class AccountRegPage extends PageTemplet {
         Assert.assertEquals(weCurrAmount.getText(), amount);
     }
 
+    /**
+     * Update account info into Json file
+     *
+     * @param customerId
+     * @param doo
+     * @param testdata
+     */
     private void updateAccount2JsonFile(String customerId, String doo, JsonObject testdata) {
         if (!weAccountId.getText().isEmpty()) {
             HashMap<String, String> update = new HashMap<>();
@@ -89,5 +93,8 @@ public class AccountRegPage extends PageTemplet {
             logger.info("Account ID has been write to Json file.");
         }
     }
+
+
 }
+
 

@@ -61,9 +61,6 @@ public class CustomerRegistrationPage extends PageTemplet {
     @CacheLookup
     private WebElement weEmail;
 
-    @FindBy(css = "body > p > a")
-    private WebElement weHomeLink;
-
     public CustomerRegistrationPage(WebDriver driver) {
         super(driver);
     }
@@ -99,10 +96,6 @@ public class CustomerRegistrationPage extends PageTemplet {
         Assert.assertEquals(wePin.getText(), pin);
         Assert.assertEquals(weMobileNum.getText(), mobileNum);
         Assert.assertEquals(weEmail.getText(), email);
-    }
-
-    public void backToHomePage() {
-        weHomeLink.click();
     }
 
     /**

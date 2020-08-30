@@ -6,11 +6,9 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import pagerepository.NewAccountPage;
-import pagerepository.NewCustomerPage;
-import pagerepository.CustomerRegistrationPage;
-import pagerepository.ManagerHomePage;
+import pagerepository.*;
 import templet.TestCaseTemplet;
+import util.Constants;
 import util.JsonDataLoader;
 
 /**
@@ -21,6 +19,9 @@ import util.JsonDataLoader;
 public class TC_NewCustomerAccount extends TestCaseTemplet {
     private Logger logger = LogManager.getLogger(TC_NewCustomerAccount.class);
     private WebDriver driver = getDriver();
+    private String customerId;
+    private String expHomePageTitle;
+    private String accountId;
 
     /**
      * Verify after Adding New Customer, page redirects to details of added customer
@@ -30,18 +31,18 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     @Test(dataProvider = "testData", dataProviderClass = JsonDataLoader.class)
     public void sm4_AddNewCustomer(JsonObject object) {
         //Navigate to add new customer page
-        String homePageTitle = JsonDataLoader.getExpectContent(ManagerHomePage.class, "expectTitle");
-        ManagerHomePage managerHomePage = new ManagerHomePage(driver, homePageTitle);
+        expHomePageTitle = JsonDataLoader.getExpectContent(ManagerHomePage.class, Constants.EXPECT_PAGE_TITLE);
+        ManagerHomePage managerHomePage = new ManagerHomePage(driver, expHomePageTitle);
         NewCustomerPage addNewCustomerPage = managerHomePage.navNewCustomerLink();
         //add a new customer
         addNewCustomerPage.addNewCustomer(object);
         logger.info("A new customer has been added.");
         //check the details of the added customer
-        String expectTitle = JsonDataLoader.getExpectContent(CustomerRegistrationPage.class, "expectTitle");
-        CustomerRegistrationPage registrationPage = new CustomerRegistrationPage(driver,expectTitle);
+        String expCusRegPageTitle = JsonDataLoader.getExpectContent(CustomerRegistrationPage.class, Constants.EXPECT_PAGE_TITLE);
+        CustomerRegistrationPage registrationPage = new CustomerRegistrationPage(driver,expCusRegPageTitle);
         registrationPage.verifyAddedCustomer(object);
         logger.info("Checked the details of the added customer");
-        registrationPage.backToHomePage();
+        registrationPage.back2HomePage();
     }
 
     /**
@@ -49,22 +50,121 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
      *
      * @param testData
      */
-    @Test(dataProvider = "testDate")
+    @Test(dataProvider = "testDate", dependsOnMethods = "sm4_AddNewCustomer")
     public void sm5_AddAccount(JsonObject testData) {
         //Navigate to new account page from homepage
-        ManagerHomePage homePage = new ManagerHomePage(driver);
+        ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
         NewAccountPage newAccountPage = homePage.navNewAccountLink();
         //get customer id from json file
-        int no = testData.get("No").getAsInt();
-        JsonObject newCustomer = (JsonObject) JsonDataLoader.getTestDataArray("sm4_AddNewCustomer").get(no);
-        String customerId = newCustomer.get("customerId").getAsString();
+        JsonObject newCustomer = JsonDataLoader.getDataObject("sm4_AddNewCustomer");
+        customerId = newCustomer.get("customerId").getAsString();
         //create a new account
         newAccountPage.addNewAccount(customerId,testData);
         logger.info("A new customer has been add to customer: " + customerId);
         //verify this account
-
-
+        String expAccRegPageTitle = JsonDataLoader.getExpectContent(AccountRegPage.class, Constants.EXPECT_PAGE_TITLE);
+        AccountRegPage accountRegPage = new AccountRegPage(driver, expAccRegPageTitle);
+        accountRegPage.verifyAccount(customerId, testData);
+        logger.info("New account details has been checked");
+        accountRegPage.back2HomePage();
     }
+
+    /**
+     * Can not delete a customer if it has a account
+     */
+    @Test(dependsOnMethods = "sm5_AddAccount")
+    public void sm11_12_DelCustomerWithAccount() {
+        //Navigate to delete customer page from home page
+        ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
+        DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
+        logger.info("Navigate to delete customer page");
+        //delete a customer which hold an account
+        deleteCustomerPage.delComster(customerId);
+        logger.info("Try to delete a customer which hold an account");
+        //check the alert message.
+        deleteCustomerPage.verifyNoticeMsg();
+        deleteCustomerPage.verifyDelErrorMsg();
+        logger.info("The alert messages have been checked");
+        //Redirect to Customer delete form
+        deleteCustomerPage.verifyTitle();
+        //Back to home page
+        deleteCustomerPage.back2HomePage();
+    }
+
+    /**
+     * delete a account
+     */
+    public void sm6_7_DelAccount() {
+        //Goto delete account page
+        ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
+        DeleteAccountPage deleteAccountPage = homePage.navDelAccountLink();
+        //Input valid account id and submit the form
+        accountId = JsonDataLoader.getDataObject("sm5_AddAccount").get("accountId").getAsString();
+        deleteAccountPage.delAccount(accountId);
+        //verify the alert message
+        deleteAccountPage.verifyNoticeMsg();
+        //confirm delete the account
+        deleteAccountPage.verifyDelSuccMsg();
+        //redirected to manager home page
+        homePage.verifyTitle();
+    }
+
+    /**
+     * Verify mini statement for deleted account
+     */
+    public void sm8_MiniStatementOfDeleteAccount() {
+        //goto mini statement page
+        ManagerHomePage homePage = new ManagerHomePage(driver);
+        MiniStatementPage miniStatementPage = homePage.navMiniStatementLink();
+        logger.info("Navigate to mini statement page");
+        //verify the mini statement is no generated for the deleted account
+        miniStatementPage.miniStatement(accountId);
+        logger.info("input the deleted account id");
+        //verify the alert message
+        miniStatementPage.verifyIncorrectAccountId();
+        //Redirects to Balance Enquiry page
+        miniStatementPage.verifyTitle();
+        logger.info("The alert message has been checked and redirects to Mini statement page");
+        miniStatementPage.back2HomePage();
+    }
+
+    /**
+     * Verify balance for deleted account
+     */
+    public void sm9_BalanceOfDeletedAccount() {
+        //goto balance enquiry page
+        ManagerHomePage homePage = new ManagerHomePage(driver);
+        BalanceEnquiryPage balanceEnquiryPage = homePage.navBalanceEnquiryLink();
+        logger.info("Navigate to Balance Equiry page");
+        balanceEnquiryPage.balanceEnquiry(accountId);
+        //A pop "Account does not exist"
+        balanceEnquiryPage.verifyIncorrectAccountId();
+        //Redirects to Balance Enquiry page
+        balanceEnquiryPage.verifyTitle();
+        balanceEnquiryPage.back2HomePage();
+    }
+
+    /**
+     * Verify statement of deleted account
+     */
+    public void sm10_CustomizedStatement() {
+        //goto customized statement page
+        ManagerHomePage homePage = new ManagerHomePage(driver);
+        CustomizedStatementPage customizedStatementPage = homePage.navCustomizedStatementLink();
+        logger.info("Navigate to Customized statement page");
+        //fill up the page
+        customizedStatementPage.customizedStatement(accountId);
+        //verify the alert message
+        customizedStatementPage.verifyIncorrectAccNoMessage();
+        //redirects to customized statement page
+        customizedStatementPage.verifyTitle();
+        customizedStatementPage.back2HomePage();
+    }
+
+    //  sm13 delete customer
+
+    //  sm14, sm15 do something with the delete customer
+
     @AfterClass
     public void tearDown() {
         driver.quit();
