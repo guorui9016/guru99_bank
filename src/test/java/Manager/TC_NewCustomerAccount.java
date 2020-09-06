@@ -94,6 +94,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     /**
      * delete a account
      */
+    @Test(dependsOnMethods = "sm11_12_DelCustomerWithAccount")
     public void sm6_7_DelAccount() {
         //Goto delete account page
         ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
@@ -112,6 +113,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     /**
      * Verify mini statement for deleted account
      */
+    @Test(groups = "checkDeletedAccunt", dependsOnMethods = "sm6_7_DelAccount")
     public void sm8_MiniStatementOfDeleteAccount() {
         //goto mini statement page
         ManagerHomePage homePage = new ManagerHomePage(driver);
@@ -131,6 +133,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     /**
      * Verify balance for deleted account
      */
+    @Test(groups = "checkDeletedAccunt", dependsOnMethods = "sm6_7_DelAccount")
     public void sm9_BalanceOfDeletedAccount() {
         //goto balance enquiry page
         ManagerHomePage homePage = new ManagerHomePage(driver);
@@ -147,6 +150,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     /**
      * Verify statement of deleted account
      */
+    @Test(groups = "checkDeletedAccunt", dependsOnMethods = "sm6_7_DelAccount")
     public void sm10_CustomizedStatement() {
         //goto customized statement page
         ManagerHomePage homePage = new ManagerHomePage(driver);
@@ -161,9 +165,47 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
         customizedStatementPage.back2HomePage();
     }
 
-    //  sm13 delete customer
+    /**
+     * Verify that a Customer can be Deleted
+     */
+    @Test(dependsOnGroups = "checkDeletedAccunt")
+    public void sm13_DelCustomerWithoutAccount() {
+        ManagerHomePage homePage = new ManagerHomePage(driver);
+        DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
+        deleteCustomerPage.delComster(customerId);
+        deleteCustomerPage.verifyDelSuccessfulMsg();
+        homePage.verifyTitle();
+    }
 
     //  sm14, sm15 do something with the delete customer
+
+    /**
+     * Verify deleted customer cannot be edited
+     */
+    public void sm14_EditCustomer() {
+        //todo
+        //Load home page
+
+        //Navigate to edit customer page
+
+        //input deleted customer id
+
+        //verify alert message
+
+        //back to home page
+    }
+
+    public void sm15_DelNonExistingCustomer() {
+        //load home page
+
+        //Navigate to delete customer page
+
+        //input the delelted customer id
+
+        //verify the alert message
+
+        //all the test should be done.
+    }
 
     @AfterClass
     public void tearDown() {

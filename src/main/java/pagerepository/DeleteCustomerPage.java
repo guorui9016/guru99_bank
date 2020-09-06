@@ -4,6 +4,9 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import templet.PageTemplet;
 import util.Constants;
@@ -58,14 +61,19 @@ public class DeleteCustomerPage extends PageTemplet {
         String expMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectDelErrorMsg");
         Assert.assertEquals(text, expMsg);
     }
+    /**
+     * Verify the error message when the customer hold a account
+     */
+    public void verifyDelSuccessfulMsg() {
+        String text = getAlertMsg();
+        String expMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectDelSuccessfulMsg");
+        Assert.assertEquals(text, expMsg);
+    }
 
     public void verifyTitle() {
         String expTitle = JsonDataLoader.getExpectContent(this.getClass(), Constants.EXPECT_PAGE_TITLE);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        WebDriverWait wait =  new WebDriverWait(driver, Constants.TIME_OUT);
+        wait.until(ExpectedConditions.titleContains("Delete"));
         Assert.assertEquals(driver.getTitle(), expTitle);
     }
 
@@ -75,4 +83,5 @@ public class DeleteCustomerPage extends PageTemplet {
         alert.accept();
         return text;
     }
+
 }

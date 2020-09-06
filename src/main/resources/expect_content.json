@@ -22,7 +22,8 @@
   "DeleteCustomerPage": {
     "expectTitle": "Guru99 Bank Delete Customer Page",
     "expectNoticeMsg": "Do you really want to delete this Customer?",
-    "expectDelErrorMsg": "Customer could not be deleted!!. First delete all accounts of this customer then delete the customer"
+    "expectDelErrorMsg": "Customer could not be deleted!!. First delete all accounts of this customer then delete the customer",
+    "expectDelSuccessfulMsg": "Customer deleted successfully"
   },
   "DeleteAccountPage": {
     "expectTitle": "Guru99 Bank Delete Account Page",
