@@ -16,7 +16,7 @@
     "confirmPassword": "@Test002"
   },
   "sm4_AddNewCustomer": {
-    "customerId": "",
+    "customerId": "70259",
     "customerName": "Virendra",
     "gender": "female",
     "dob": "04112013",
@@ -29,13 +29,13 @@
     "email": "Virendra998@gmail.com",
     "pwd": "123456"
   },
-  "sm5_AddNewAccount": {
-    "customerId": "",
-    "accountId": "",
+  "sm5_AddAccount": {
+    "customerId": "70259",
+    "accountId": "83447",
     "customerName": "Virendra",
-    "Email" :"Virendra998@gmail.com",
-    "accountType": "Savings",
-    "dateOfOpen" : "",
-    "amount": "500"
+    "Email": "Virendra998@gmail.com",
+    "typeValue": "Savings",
+    "dateOfOpen": "2020-09-09",
+    "deposit": "500"
   }
 }

@@ -20,7 +20,6 @@ public class NewAccountPage extends PageTemplet {
     private WebElement weCustomerId;
 
     @FindBy(name = "selaccount")
-    @CacheLookup
     private WebElement weAccType;
 
     @FindBy(name = "inideposit")
@@ -48,7 +47,8 @@ public class NewAccountPage extends PageTemplet {
         sendKey(weCustomerId, customerId);
         //select the type from the list
         Select selectType = new Select(weAccType);
-        selectType.selectByVisibleText(testData.get("type").getAsString());
+        String type = testData.get("typeValue").getAsString();
+        selectType.selectByValue(type);
         sendKey(weInitDeposit, testData.get("deposit").getAsString());
         btnSubmit.click();
     }

@@ -50,7 +50,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
      *
      * @param testData
      */
-    @Test(dataProvider = "testDate", dependsOnMethods = "sm4_AddNewCustomer")
+    @Test( dataProvider = "testData", dataProviderClass = JsonDataLoader.class, dependsOnMethods = "sm4_AddNewCustomer")
     public void sm5_AddAccount(JsonObject testData) {
         //Navigate to new account page from homepage
         ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
@@ -79,7 +79,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
         DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
         logger.info("Navigate to delete customer page");
         //delete a customer which hold an account
-        deleteCustomerPage.delComster(customerId);
+        deleteCustomerPage.delCustomer(customerId);
         logger.info("Try to delete a customer which hold an account");
         //check the alert message.
         deleteCustomerPage.verifyNoticeMsg();
@@ -172,7 +172,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     public void sm13_DelCustomerWithoutAccount() {
         ManagerHomePage homePage = new ManagerHomePage(driver);
         DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
-        deleteCustomerPage.delComster(customerId);
+        deleteCustomerPage.delCustomer(customerId);
         deleteCustomerPage.verifyDelSuccessfulMsg();
         homePage.verifyTitle();
     }

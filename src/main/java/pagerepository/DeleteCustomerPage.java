@@ -4,7 +4,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,9 +13,8 @@ import util.JsonDataLoader;
 
 /**
  * @author Rui Guo
- *
+ * <p>
  * Guru99 bank demo: Delete customer page object class
- *
  */
 
 public class DeleteCustomerPage extends PageTemplet {
@@ -37,9 +35,10 @@ public class DeleteCustomerPage extends PageTemplet {
 
     /**
      * Delete customer by id
+     *
      * @param customerId
      */
-    public void delComster(String customerId) {
+    public void delCustomer(String customerId) {
         sendKey(weCustomerId, customerId);
         btnSubmit.click();
     }
@@ -50,7 +49,7 @@ public class DeleteCustomerPage extends PageTemplet {
     public void verifyNoticeMsg() {
         String text = getAlertMsg();
         String expMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectNoticeMsg");
-        Assert.assertEquals(text,expMsg);
+        Assert.assertEquals(text, expMsg);
     }
 
     /**
@@ -61,6 +60,7 @@ public class DeleteCustomerPage extends PageTemplet {
         String expMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectDelErrorMsg");
         Assert.assertEquals(text, expMsg);
     }
+
     /**
      * Verify the error message when the customer hold a account
      */
@@ -72,7 +72,7 @@ public class DeleteCustomerPage extends PageTemplet {
 
     public void verifyTitle() {
         String expTitle = JsonDataLoader.getExpectContent(this.getClass(), Constants.EXPECT_PAGE_TITLE);
-        WebDriverWait wait =  new WebDriverWait(driver, Constants.TIME_OUT);
+        WebDriverWait wait = new WebDriverWait(driver, Constants.TIME_OUT);
         wait.until(ExpectedConditions.titleContains("Delete"));
         Assert.assertEquals(driver.getTitle(), expTitle);
     }
@@ -83,5 +83,4 @@ public class DeleteCustomerPage extends PageTemplet {
         alert.accept();
         return text;
     }
-
 }

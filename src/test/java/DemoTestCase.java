@@ -1,16 +1,12 @@
-import pagerepository.LoginPage;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
+import pagerepository.DeleteAccountPage;
+import pagerepository.DeleteCustomerPage;
+import pagerepository.ManagerHomePage;
+import templet.TestCaseTemplet;
 import util.JsonDataLoader;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-
-public class DemoTestCase{
-    public static void main(String[] args) {
-        LocalDate date = LocalDate.now();
-
-        System.out.println(date.toString());
-    }
+public class DemoTestCase extends TestCaseTemplet {
 
 
 }

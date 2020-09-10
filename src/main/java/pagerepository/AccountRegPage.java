@@ -61,8 +61,8 @@ public class AccountRegPage extends PageTemplet {
         //get information from the page
         String customerName = testdata.get("customerName").getAsString();
         String email = testdata.get("Email").getAsString();
-        String accountType = testdata.get("accountType").getAsString();
-        String amount = testdata.get("amount").getAsString();
+        String accountType = testdata.get("typeValue").getAsString();
+        String amount = testdata.get("deposit").getAsString();
         //get the local system time
         String doo = LocalDate.now().toString();
         //save account info to json file
