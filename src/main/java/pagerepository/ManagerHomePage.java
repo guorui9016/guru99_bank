@@ -23,6 +23,9 @@ public class ManagerHomePage extends PageTemplet {
     @FindBy(css = ".menusubnav > li:nth-child(2) > a")
     private WebElement weNewCustomerLink;
 
+    @FindBy(css = ".menusubnav > li:nth-child(3) > a")
+    private WebElement weEditCustomerLink;
+
     @FindBy(css = ".menusubnav > li:nth-child(4) > a")
     private WebElement weDelCustomerLink;
 
@@ -70,6 +73,11 @@ public class ManagerHomePage extends PageTemplet {
     public NewAccountPage navNewAccountLink() {
         weNewAccountLink.click();
         return new NewAccountPage(driver);
+    }
+
+    public EditCustomerPage navEditCustomerLink() {
+        weEditCustomerLink.click();
+        return new EditCustomerPage(driver);
     }
 
     public DeleteCustomerPage navDelCustomerLink() {

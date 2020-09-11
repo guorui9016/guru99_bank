@@ -7,7 +7,7 @@
     <test verbose="2" preserve-order="true" name="D:/workplace/Selenium/guru99_bank">
         <classes>
             <class name="Manager.TC_ChangePassword"></class>
-            <class name="Manager.TC_NewCustomerAccount"></class>
+            <class name="Manager.TC_CustomerAccount"></class>
         </classes>
     </test>
 </suite>

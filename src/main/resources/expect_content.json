@@ -23,6 +23,7 @@
     "expectTitle": "Guru99 Bank Delete Customer Page",
     "expectNoticeMsg": "Do you really want to delete this Customer?",
     "expectDelErrorMsg": "Customer could not be deleted!!. First delete all accounts of this customer then delete the customer",
+    "expectDelNoExistCustomerMsg": "You are not authorise to delete this account!",
     "expectDelSuccessfulMsg": "Customer deleted successfully"
   },
   "DeleteAccountPage": {
@@ -41,5 +42,9 @@
   "CustomizedStatementPage": {
     "expectTitle": "Guru99 Bank Statement Page",
     "expectIncorrectAccountMsg": "Account does not exist"
+  },
+  "EditCustomerPage": {
+    "expectTitle": "Guru99 Bank Edit Customer Page",
+    "expectIncorrectAccountMsg": "Customer does not exist!!"
   }
 }

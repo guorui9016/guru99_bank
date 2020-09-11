@@ -57,7 +57,7 @@ public class CustomizedStatementPage extends PageTemplet {
     /**
      * Verify the alert message when use deleted account id
      */
-    public void verifyIncorrectAccNoMessage() {
+    public void verifyIncorrectAccNoMsg() {
         String expIncorrectMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectIncorrectAccountMsg");
         Alert alert = driver.switchTo().alert();
         String text = alert.getText();

@@ -37,7 +37,7 @@ public class MiniStatementPage extends PageTemplet {
         btnSubmit.click();
     }
 
-    public void verifyIncorrectAccountId() {
+    public void verifyIncorrectAccountIdMsg() {
         String incorrectAccountMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectIncorrectAccountMsg");
         Alert alert = driver.switchTo().alert();
         String text = alert.getText();

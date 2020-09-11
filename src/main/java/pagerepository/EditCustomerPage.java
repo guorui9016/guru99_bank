@@ -14,10 +14,9 @@ import util.JsonDataLoader;
 /**
  * @author Rui Guo
  * <p>
- * Guru99 bank demo: Delete customer page object class
+ * Guru99 bank demo: Edit customer page object class
  */
-
-public class DeleteCustomerPage extends PageTemplet {
+public class EditCustomerPage extends PageTemplet {
     //WebElement
     @FindBy(name = "cusid")
     private WebElement weCustomerId;
@@ -25,11 +24,11 @@ public class DeleteCustomerPage extends PageTemplet {
     @FindBy(name = "AccSubmit")
     private WebElement btnSubmit;
 
-    public DeleteCustomerPage(WebDriver driver) {
+    public EditCustomerPage(WebDriver driver) {
         super(driver);
     }
 
-    public DeleteCustomerPage(WebDriver driver, String expTitle) {
+    public EditCustomerPage(WebDriver driver, String expTitle) {
         super(driver, expTitle);
     }
 
@@ -38,51 +37,31 @@ public class DeleteCustomerPage extends PageTemplet {
      *
      * @param customerId
      */
-    public void delCustomer(String customerId) {
+    public void eidtCustomer(String customerId) {
         sendKey(weCustomerId, customerId);
         btnSubmit.click();
-    }
-
-    /**
-     * Verify the notice message after click the submit button.
-     */
-    public void verifyNoticeMsg() {
-        verifyAlertMsg("expectNoticeMsg");
     }
 
     /**
      * Verify the error message when the customer hold a account
      */
     public void verifyDelErrorMsg() {
-        verifyAlertMsg("expectDelErrorMsg");
-    }
-
-    /**
-     * Verify the error message that the customer is not exist
-     */
-    public void verifyDelNoExistMsg() {
-        verifyAlertMsg("expectDelNoExistCustomerMsg");
-    }
-
-    /**
-     * Verify the success message after delete a customer
-     */
-    public void verifyDelSuccessfulMsg() {
-        verifyAlertMsg("expectDelSuccessfulMsg");
+        String text = getAlertMsg();
+        String expMsg = JsonDataLoader.getExpectContent(this.getClass(), "expectDelErrorMsg");
+        Assert.assertEquals(text, expMsg);
     }
 
     public void verifyTitle() {
         String expTitle = JsonDataLoader.getExpectContent(this.getClass(), Constants.EXPECT_PAGE_TITLE);
         WebDriverWait wait = new WebDriverWait(driver, Constants.TIME_OUT);
-        wait.until(ExpectedConditions.titleContains("Delete"));
+        wait.until(ExpectedConditions.titleContains("Edit"));
         Assert.assertEquals(driver.getTitle(), expTitle);
     }
 
-    private void verifyAlertMsg(String jsonKey){
+    private String getAlertMsg() {
         Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
+        String text = alert.getText();
         alert.accept();
-        String expMsg = JsonDataLoader.getExpectContent(this.getClass(), jsonKey);
-        Assert.assertEquals(alertText, expMsg);
+        return text;
     }
 }

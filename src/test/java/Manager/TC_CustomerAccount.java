@@ -16,8 +16,8 @@ import util.JsonDataLoader;
  *
  * Guru99 bank: Add New Customer & Account
  */
-public class TC_NewCustomerAccount extends TestCaseTemplet {
-    private Logger logger = LogManager.getLogger(TC_NewCustomerAccount.class);
+public class TC_CustomerAccount extends TestCaseTemplet {
+    private Logger logger = LogManager.getLogger(TC_CustomerAccount.class);
     private WebDriver driver = getDriver();
     private String customerId;
     private String expHomePageTitle;
@@ -30,6 +30,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
      */
     @Test(dataProvider = "testData", dataProviderClass = JsonDataLoader.class)
     public void sm4_AddNewCustomer(JsonObject object) {
+        logger.warn("Start SM4 test case");
         //Navigate to add new customer page
         expHomePageTitle = JsonDataLoader.getExpectContent(ManagerHomePage.class, Constants.EXPECT_PAGE_TITLE);
         ManagerHomePage managerHomePage = new ManagerHomePage(driver, expHomePageTitle);
@@ -52,6 +53,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
      */
     @Test( dataProvider = "testData", dataProviderClass = JsonDataLoader.class, dependsOnMethods = "sm4_AddNewCustomer")
     public void sm5_AddAccount(JsonObject testData) {
+        logger.warn("Start SM5 test case");
         //Navigate to new account page from homepage
         ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
         NewAccountPage newAccountPage = homePage.navNewAccountLink();
@@ -74,6 +76,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
      */
     @Test(dependsOnMethods = "sm5_AddAccount")
     public void sm11_12_DelCustomerWithAccount() {
+        logger.warn("Start SM11 & SM12 test case");
         //Navigate to delete customer page from home page
         ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
         DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
@@ -96,16 +99,20 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
      */
     @Test(dependsOnMethods = "sm11_12_DelCustomerWithAccount")
     public void sm6_7_DelAccount() {
+        logger.warn("Start SM6 & SM7 test case");
         //Goto delete account page
         ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
         DeleteAccountPage deleteAccountPage = homePage.navDelAccountLink();
+        logger.info("Navigate to delete account page");
         //Input valid account id and submit the form
         accountId = JsonDataLoader.getDataObject("sm5_AddAccount").get("accountId").getAsString();
         deleteAccountPage.delAccount(accountId);
+        logger.info("Delete account");
         //verify the alert message
         deleteAccountPage.verifyNoticeMsg();
         //confirm delete the account
         deleteAccountPage.verifyDelSuccMsg();
+        logger.info("Alert message has been checked");
         //redirected to manager home page
         homePage.verifyTitle();
     }
@@ -113,8 +120,9 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     /**
      * Verify mini statement for deleted account
      */
-    @Test(groups = "checkDeletedAccunt", dependsOnMethods = "sm6_7_DelAccount")
+    @Test(groups = "checkDeletedAccount", dependsOnMethods = "sm6_7_DelAccount")
     public void sm8_MiniStatementOfDeleteAccount() {
+        logger.warn("Start SM8 test case");
         //goto mini statement page
         ManagerHomePage homePage = new ManagerHomePage(driver);
         MiniStatementPage miniStatementPage = homePage.navMiniStatementLink();
@@ -123,7 +131,7 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
         miniStatementPage.miniStatement(accountId);
         logger.info("input the deleted account id");
         //verify the alert message
-        miniStatementPage.verifyIncorrectAccountId();
+        miniStatementPage.verifyIncorrectAccountIdMsg();
         //Redirects to Balance Enquiry page
         miniStatementPage.verifyTitle();
         logger.info("The alert message has been checked and redirects to Mini statement page");
@@ -133,8 +141,9 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
     /**
      * Verify balance for deleted account
      */
-    @Test(groups = "checkDeletedAccunt", dependsOnMethods = "sm6_7_DelAccount")
+    @Test(groups = "checkDeletedAccount", dependsOnMethods = "sm6_7_DelAccount")
     public void sm9_BalanceOfDeletedAccount() {
+        logger.warn("Start SM9 test case");
         //goto balance enquiry page
         ManagerHomePage homePage = new ManagerHomePage(driver);
         BalanceEnquiryPage balanceEnquiryPage = homePage.navBalanceEnquiryLink();
@@ -144,72 +153,83 @@ public class TC_NewCustomerAccount extends TestCaseTemplet {
         balanceEnquiryPage.verifyIncorrectAccountId();
         //Redirects to Balance Enquiry page
         balanceEnquiryPage.verifyTitle();
+        logger.info("Alert message has been checked and redirect to balance page");
         balanceEnquiryPage.back2HomePage();
     }
 
     /**
      * Verify statement of deleted account
      */
-    @Test(groups = "checkDeletedAccunt", dependsOnMethods = "sm6_7_DelAccount")
+    @Test(groups = "checkDeletedAccount", dependsOnMethods = "sm6_7_DelAccount")
     public void sm10_CustomizedStatement() {
         //goto customized statement page
+        logger.warn("Start SM10 test case");
         ManagerHomePage homePage = new ManagerHomePage(driver);
         CustomizedStatementPage customizedStatementPage = homePage.navCustomizedStatementLink();
         logger.info("Navigate to Customized statement page");
         //fill up the page
         customizedStatementPage.customizedStatement(accountId);
         //verify the alert message
-        customizedStatementPage.verifyIncorrectAccNoMessage();
+        customizedStatementPage.verifyIncorrectAccNoMsg();
         //redirects to customized statement page
         customizedStatementPage.verifyTitle();
+        logger.info("Alert message has been checked and redirect to customize statement page");
         customizedStatementPage.back2HomePage();
     }
 
     /**
      * Verify that a Customer can be Deleted
      */
-    @Test(dependsOnGroups = "checkDeletedAccunt")
+    @Test(dependsOnGroups = "checkDeletedAccount")
     public void sm13_DelCustomerWithoutAccount() {
-        ManagerHomePage homePage = new ManagerHomePage(driver);
+        logger.warn("Start SM13 test case");
+        ManagerHomePage homePage = new ManagerHomePage(driver,expHomePageTitle);
         DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
+        logger.info("Navigate to delete customer page");
         deleteCustomerPage.delCustomer(customerId);
         deleteCustomerPage.verifyDelSuccessfulMsg();
         homePage.verifyTitle();
+        logger.info("The customer has been deleted and redirect to home page");
     }
-
-    //  sm14, sm15 do something with the delete customer
 
     /**
      * Verify deleted customer cannot be edited
      */
     public void sm14_EditCustomer() {
-        //todo
-        //Load home page
-
+        logger.warn("Start SM14 test case");
+        ManagerHomePage homePage = new ManagerHomePage(driver, expHomePageTitle);
         //Navigate to edit customer page
-
+        EditCustomerPage editCustomerPage = homePage.navEditCustomerLink();
+        logger.info("Navigate to edit customer page");
         //input deleted customer id
-
+        editCustomerPage.eidtCustomer(customerId);
         //verify alert message
-
+        editCustomerPage.verifyDelErrorMsg();
+        editCustomerPage.verifyTitle();
+        logger.info("The alert message has been checked and redirect to edit customer page");
         //back to home page
+        editCustomerPage.back2HomePage();
     }
 
     public void sm15_DelNonExistingCustomer() {
         //load home page
-
+        logger.warn("Start SM15 test case");
+        ManagerHomePage homePage = new ManagerHomePage(driver,expHomePageTitle);
         //Navigate to delete customer page
-
+        DeleteCustomerPage deleteCustomerPage = homePage.navDelCustomerLink();
+        logger.info("Navigate to delete customer page");
         //input the delelted customer id
-
+        deleteCustomerPage.delCustomer(customerId);
         //verify the alert message
-
-        //all the test should be done.
+        deleteCustomerPage.verifyNoticeMsg();
+        deleteCustomerPage.verifyDelNoExistMsg();
+        logger.info("Alert message has been checked");
+        //it is last test case about the customer and account, so do not need back to home page
     }
 
     @AfterClass
     public void tearDown() {
         driver.quit();
-        logger.info("Quit driver");
+        logger.info("Customer and account test have been finished!");
     }
 }
