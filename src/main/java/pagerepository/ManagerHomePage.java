@@ -35,6 +35,15 @@ public class ManagerHomePage extends PageTemplet {
     @FindBy(css = ".menusubnav > li:nth-child(7) > a")
     private WebElement weDelAccountLink;
 
+    @FindBy(css = ".menusubnav > li:nth-child(8) > a")
+    private WebElement weDepositLink;
+
+    @FindBy(css = ".menusubnav > li:nth-child(9) > a")
+    private WebElement weWithDrawalLink;
+
+    @FindBy(css = ".menusubnav > li:nth-child(10) > a")
+    private WebElement weTransferLink;
+
     @FindBy(css = ".menusubnav > li:nth-child(11) > a")
     private WebElement weChangePasswordLink;
 
