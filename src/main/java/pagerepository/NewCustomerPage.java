@@ -115,5 +115,4 @@ public class NewCustomerPage extends PageTemplet {
         alert.accept();
         Assert.assertEquals(text, message);
     }
-
 }

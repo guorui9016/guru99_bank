@@ -66,7 +66,7 @@ public class AccountRegPage extends PageTemplet {
         //get the local system time
         String doo = LocalDate.now().toString();
         //save account info to json file
-        updateAccount2JsonFile(customerId, doo, testdata);
+        updateAccount2JsonFile(customerId, testdata);
         //check all info
         Assert.assertEquals(weCustomerId.getText(), customerId);
         Assert.assertEquals(weCustomerName.getText(), customerName);
@@ -80,15 +80,14 @@ public class AccountRegPage extends PageTemplet {
      * Update account info into Json file
      *
      * @param customerId
-     * @param doo
      * @param testdata
      */
-    private void updateAccount2JsonFile(String customerId, String doo, JsonObject testdata) {
+    public void updateAccount2JsonFile(String customerId, JsonObject testdata) {
         if (!weAccountId.getText().isEmpty()) {
             HashMap<String, String> update = new HashMap<>();
             update.put("customerId", customerId);
             update.put("accountId", weAccountId.getText());
-            update.put("dateOfOpen", doo);
+            update.put("dateOfOpen", LocalDate.now().toString());
             JsonDataLoader.updateDataToFile(testdata, update);
             logger.info("Account ID has been write to Json file.");
         }

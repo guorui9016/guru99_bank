@@ -34,7 +34,7 @@ public class JsonDataLoader {
     }
 
     /**
-     * Load data from Json file.
+     * Load data from Json object.
      *
      * @param method
      * @return Object[][]
@@ -50,6 +50,12 @@ public class JsonDataLoader {
         return testData;
     }
 
+    /**
+     * Load data from Json object array
+     *
+     * @param method
+     * @return
+     */
     @DataProvider(name = "testDataArray")
     public static Object[][] loadDataArray(Method method) {
         String methodName = method.getName();
@@ -60,6 +66,19 @@ public class JsonDataLoader {
         }
         logger.info("Load test data from json file to method: " + methodName);
         return testDataList;
+    }
+
+    /**
+     *  Load data for prepare data
+     *
+     * @return
+     */
+    public static JsonArray prepareData() {
+        //load Json object array first
+        JsonArray jsonArray = testData.getAsJsonArray("prepare_data");
+        //add the customer and account number after save all of data
+        logger.info("Load prepare data from json file.");
+        return jsonArray;
     }
 
     public static JsonArray getDataArray(String objectName) {

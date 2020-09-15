@@ -33,9 +33,47 @@
     "customerId": "70259",
     "accountId": "83447",
     "customerName": "Virendra",
-    "Email": "Virendra998@gmail.com",
+    "email": "Virendra998@gmail.com",
     "typeValue": "Savings",
     "dateOfOpen": "2020-09-09",
     "deposit": "500"
-  }
+  },
+
+  "prepare_data": [
+    { "customerId": "",
+      "accountId": "",
+      "customerName": "John",
+      "gender": "male",
+      "dob": "09102015",
+      "verifyDob": "2015-10-09",
+      "address": "Sydney",
+      "city": "Sydney",
+      "state": "NSW",
+      "pin": "987654",
+      "mobileNum": "460987345",
+      "email": "John001@gmail.com",
+      "pwd": "123456",
+      "typeValue": "Savings",
+      "deposit": "900000",
+      "dateOfOpen": ""
+    },
+
+    { "customerId": "",
+      "accountId": "",
+      "customerName": "Emma",
+      "gender": "female",
+      "dob": "26062010",
+      "verifyDob": "2010-06-26",
+      "address": "Brisbane",
+      "city": "Brisbane",
+      "state": "QLD",
+      "pin": "123456",
+      "mobileNum": "+16469802573",
+      "email": "Emma001@gmail.com",
+      "pwd": "123456",
+      "typeValue": "Savings",
+      "deposit": "500000",
+      "dateOfOpen": ""
+    }
+  ]
 }

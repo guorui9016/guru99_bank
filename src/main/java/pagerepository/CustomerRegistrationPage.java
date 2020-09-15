@@ -85,7 +85,7 @@ public class CustomerRegistrationPage extends PageTemplet {
         String email = object.get("email").getAsString();
 
         Util.screenShot(driver, "verifyAddedCustomer"+ name);
-        setCustomerIdToJsonFile(object);
+        updateCustomerId2JsonFile(object);
 
         Assert.assertEquals(weName.getText(), name);
         Assert.assertEquals(weGender.getText(), gender);
@@ -104,12 +104,16 @@ public class CustomerRegistrationPage extends PageTemplet {
      * Notice: Do not need this step if load data from database.
      *          I can not access guru99 bank database, so I used Json file instead of it.
      */
-    private void setCustomerIdToJsonFile(JsonObject object) {
+    public void updateCustomerId2JsonFile(JsonObject object) {
         if (!weCustomerId.getText().isEmpty()) {
             HashMap<String, String> customerId = new HashMap<>();
             customerId.put("customerId", weCustomerId.getText());
             JsonDataLoader.updateDataToFile(object, customerId);
             logger.info("Customer ID has been write to Json file.");
         }
+    }
+
+    public String getCustomerId() {
+        return weCustomerId.getText();
     }
 }
