@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import pagerepository.*;
-import templet.TestCaseTemplet;
+import base.TestCaseTemplet;
 import util.Constants;
 import util.JsonDataLoader;
 

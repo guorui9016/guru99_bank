@@ -1,14 +1,12 @@
 package pagerepository;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.json.Json;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.JsonDataLoader;
 
 /**
@@ -17,7 +15,7 @@ import util.JsonDataLoader;
  * Guru99 bank demo: Login page object class
  */
 
-public class LoginPage extends PageTemplet {
+public class LoginPage extends PageBase {
     @FindBy(name = "uid")
     @CacheLookup
     private WebElement weUserID;

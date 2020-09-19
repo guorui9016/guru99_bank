@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.Constants;
 import util.JsonDataLoader;
 
@@ -16,7 +16,7 @@ import util.JsonDataLoader;
  * <p>
  * Guru99 bank demo: Edit customer page object class
  */
-public class EditCustomerPage extends PageTemplet {
+public class EditCustomerPage extends PageBase {
     //WebElement
     @FindBy(name = "cusid")
     private WebElement weCustomerId;

@@ -5,10 +5,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.JsonDataLoader;
 
 import java.time.LocalDate;
@@ -20,7 +19,7 @@ import java.util.HashMap;
  * Guru99 bank demo: Account Reg Page object class
  *
  */
-public class AccountRegPage extends PageTemplet {
+public class AccountRegPage extends PageBase {
     Logger logger = LogManager.getLogger(AccountRegPage.class);
 
     @FindBy(css = "#account tr:nth-child(4) > td:nth-child(2)")

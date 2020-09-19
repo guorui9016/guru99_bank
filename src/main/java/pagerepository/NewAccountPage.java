@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import templet.PageTemplet;
+import base.PageBase;
 
 /**
  * @author Rui Guo
@@ -14,7 +14,7 @@ import templet.PageTemplet;
  * Guru99 bank demo: New Account Page object class
  *
  */
-public class NewAccountPage extends PageTemplet {
+public class NewAccountPage extends PageBase {
     @FindBy(name = "cusid")
     @CacheLookup
     private WebElement weCustomerId;

@@ -1,4 +1,4 @@
-package templet;
+package base;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.openqa.selenium.TimeoutException;
@@ -18,12 +18,12 @@ import util.JsonDataLoader;
  *
  * Guru99 bank: base page object class
  */
-public class PageTemplet {
+public class PageBase {
     protected WebDriver driver;
     @FindBy(css = ".menusubnav > li:nth-child(1) > a")
     private WebElement weHomePage;
 
-    public PageTemplet(WebDriver driver) {
+    public PageBase(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, Constants.TIME_OUT), this);
     }
@@ -34,7 +34,7 @@ public class PageTemplet {
      * @param driver
      * @param expTitle
      */
-    public PageTemplet(WebDriver driver, String expTitle) {
+    public PageBase(WebDriver driver, String expTitle) {
         this.driver = driver;
         WebDriverWait wait = new WebDriverWait(driver, Constants.TIME_OUT);
         try {

@@ -1,7 +1,7 @@
 package Manager;
 
 import org.openqa.selenium.WebDriver;
-import templet.TestCaseTemplet;
+import base.TestCaseTemplet;
 
 /**
  * @author Rui Guo

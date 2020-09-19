@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.Constants;
 import util.JsonDataLoader;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
  *
  */
 
-public class DeleteAccountPage extends PageTemplet {
+public class DeleteAccountPage extends PageBase {
     //WebElement
     @FindBy(name = "accountno")
     private WebElement weAccountId;

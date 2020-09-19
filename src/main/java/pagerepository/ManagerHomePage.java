@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.JsonDataLoader;
 
 /**
@@ -15,7 +15,7 @@ import util.JsonDataLoader;
  * Guru99 bank demo: Home page object class
  *
  */
-public class ManagerHomePage extends PageTemplet {
+public class ManagerHomePage extends PageBase {
     //WebElements
     @FindBy(css = ".heading3 td")
     private WebElement weManagerID;

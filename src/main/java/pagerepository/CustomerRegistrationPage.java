@@ -8,9 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.JsonDataLoader;
 import util.Util;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -18,7 +20,7 @@ import java.util.HashMap;
  *
  * Guru99 bank: Customer regeistration page object class
  */
-public class CustomerRegistrationPage extends PageTemplet {
+public class CustomerRegistrationPage extends PageBase {
     private Logger logger = LogManager.getLogger(CustomerRegistrationPage.class);
 
     @FindBy(css = "#customer > tbody > tr:nth-child(4) > td:nth-child(2)")
@@ -84,9 +86,8 @@ public class CustomerRegistrationPage extends PageTemplet {
         String mobileNum = object.get("mobileNum").getAsString();
         String email = object.get("email").getAsString();
 
-        Util.screenShot(driver, "verifyAddedCustomer"+ name);
+        Util.screenShot(driver, "AddedCustomer"+ name + LocalDate.now().toString());
         updateCustomerId2JsonFile(object);
-
         Assert.assertEquals(weName.getText(), name);
         Assert.assertEquals(weGender.getText(), gender);
         Assert.assertEquals(weDob.getText(), verifyDob);

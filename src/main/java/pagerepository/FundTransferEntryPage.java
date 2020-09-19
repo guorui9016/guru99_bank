@@ -4,14 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import templet.PageTemplet;
+import base.PageBase;
 
 /**
  * @author Rui Guo
  *
  * Guru99 bank: Fund Transfer Entry Page object class
  */
-public class FundTransferEntryPage extends PageTemplet {
+public class FundTransferEntryPage extends PageBase {
     @FindBy(name = "payersaccount")
     @CacheLookup
     private WebElement wePayerAccNo;

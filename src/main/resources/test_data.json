@@ -38,10 +38,10 @@
     "dateOfOpen": "2020-09-09",
     "deposit": "500"
   },
-
   "prepare_data": [
-    { "customerId": "",
-      "accountId": "",
+    {
+      "customerId": "68691",
+      "accountId": "83895",
       "customerName": "John",
       "gender": "male",
       "dob": "09102015",
@@ -55,11 +55,11 @@
       "pwd": "123456",
       "typeValue": "Savings",
       "deposit": "900000",
-      "dateOfOpen": ""
+      "dateOfOpen": "2020-09-17"
     },
-
-    { "customerId": "",
-      "accountId": "",
+    {
+      "customerId": "56092",
+      "accountId": "83896",
       "customerName": "Emma",
       "gender": "female",
       "dob": "26062010",
@@ -73,7 +73,7 @@
       "pwd": "123456",
       "typeValue": "Savings",
       "deposit": "500000",
-      "dateOfOpen": ""
+      "dateOfOpen": "2020-09-17"
     }
   ]
 }

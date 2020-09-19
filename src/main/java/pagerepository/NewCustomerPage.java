@@ -7,14 +7,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 
 /**
  * @author Rui Guo
  *
  * Guru99 bank demo: Add New Customer page object class
  */
-public class NewCustomerPage extends PageTemplet {
+public class NewCustomerPage extends PageBase {
     private Logger logger = LogManager.getLogger(NewCustomerPage.class);
 
     @FindBy(name = "name")

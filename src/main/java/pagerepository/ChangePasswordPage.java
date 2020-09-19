@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-import templet.PageTemplet;
+import base.PageBase;
 import util.JsonDataLoader;
 
 /**
@@ -15,7 +15,7 @@ import util.JsonDataLoader;
  * Guru99 bank demo: change password object class
  *
  */
-public class ChangePasswordPage extends PageTemplet {
+public class ChangePasswordPage extends PageBase {
 
     //init webElement
     @FindBy(name = "oldpassword")

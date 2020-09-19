@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import pagerepository.ChangePasswordPage;
 import pagerepository.ManagerHomePage;
 import pagerepository.LoginPage;
-import templet.TestCaseTemplet;
+import base.TestCaseTemplet;
 import util.JsonDataLoader;
 import java.util.HashMap;
 
