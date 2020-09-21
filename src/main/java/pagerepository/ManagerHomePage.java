@@ -99,6 +99,11 @@ public class ManagerHomePage extends PageBase {
         return new DeleteAccountPage(driver);
     }
 
+    public FundTransferPage navFundTransfer() {
+        weTransferLink.click();
+        return new FundTransferPage(driver);
+    }
+
     public BalanceEnquiryPage navBalanceEnquiryLink() {
         weBalanceEnquiry.click();
         return new BalanceEnquiryPage(driver);

@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import pagerepository.ChangePasswordPage;
 import pagerepository.ManagerHomePage;
 import pagerepository.LoginPage;
-import base.TestCaseTemplet;
+import base.TestCaseBase;
 import util.JsonDataLoader;
 import java.util.HashMap;
 
@@ -18,7 +18,7 @@ import java.util.HashMap;
  *
  * Guru99 bank: Change Password then Login
  */
-public class TC_ChangePassword extends TestCaseTemplet {
+public class TC_ChangePassword extends TestCaseBase {
     private Logger logger = LogManager.getLogger(TC_ChangePassword.class);
     private WebDriver driver = getDriver();
     private String newPassword;

@@ -11,7 +11,7 @@ import base.PageBase;
  *
  * Guru99 bank: Fund Transfer Entry Page object class
  */
-public class FundTransferEntryPage extends PageBase {
+public class FundTransferPage extends PageBase {
     @FindBy(name = "payersaccount")
     @CacheLookup
     private WebElement wePayerAccNo;
@@ -32,11 +32,11 @@ public class FundTransferEntryPage extends PageBase {
     @CacheLookup
     private WebElement weSubmit;
 
-    public FundTransferEntryPage(WebDriver driver) {
+    public FundTransferPage(WebDriver driver) {
         super(driver);
     }
 
-    public FundTransferEntryPage(WebDriver driver, String expTitle) {
+    public FundTransferPage(WebDriver driver, String expTitle) {
         super(driver, expTitle);
     }
 

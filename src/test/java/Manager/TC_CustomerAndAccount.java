@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import pagerepository.*;
-import base.TestCaseTemplet;
+import base.TestCaseBase;
 import util.Constants;
 import util.JsonDataLoader;
 
@@ -16,8 +16,8 @@ import util.JsonDataLoader;
  *
  * Guru99 bank: Add New Customer & Account
  */
-public class TC_CustomerAccount extends TestCaseTemplet {
-    private Logger logger = LogManager.getLogger(TC_CustomerAccount.class);
+public class TC_CustomerAndAccount extends TestCaseBase {
+    private Logger logger = LogManager.getLogger(TC_CustomerAndAccount.class);
     private WebDriver driver = getDriver();
     private String customerId;
     private String expHomePageTitle;
@@ -51,7 +51,7 @@ public class TC_CustomerAccount extends TestCaseTemplet {
      *
      * @param testData
      */
-    @Test( dataProvider = "testData", dataProviderClass = JsonDataLoader.class, dependsOnMethods = "sm4_AddNewCustomer")
+    @Test(dataProvider = "testData", dataProviderClass = JsonDataLoader.class, dependsOnMethods = "sm4_AddNewCustomer")
     public void sm5_AddAccount(JsonObject testData) {
         logger.warn("Start SM5 test case");
         //Navigate to new account page from homepage

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pagerepository.*;
-import base.TestCaseTemplet;
+import base.TestCaseBase;
 import util.Constants;
 import util.JsonDataLoader;
 
@@ -20,7 +20,7 @@ public class PrepareData {
     public static void main(String[] args) {
         //run in headless mode
         System.out.println("Start adding data");
-        TestCaseTemplet testCase = new TestCaseTemplet(true);
+        TestCaseBase testCase = new TestCaseBase(true);
         testCase.login();
         driver = testCase.getDriver();
         //get data from Json file

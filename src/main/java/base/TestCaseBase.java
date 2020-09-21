@@ -20,16 +20,16 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Guru99 bank: base test case class
  */
-public class TestCaseTemplet {
+public class TestCaseBase {
 
-    private Logger logger = LogManager.getLogger(TestCaseTemplet.class.getName());
+    private Logger logger = LogManager.getLogger(TestCaseBase.class.getName());
     private WebDriver driver;
 
-    public TestCaseTemplet() {
+    public TestCaseBase() {
         this.initializeDriver(false);
     }
 
-    public TestCaseTemplet(boolean headless) {
+    public TestCaseBase(boolean headless) {
         this.initializeDriver(headless);
     }
 

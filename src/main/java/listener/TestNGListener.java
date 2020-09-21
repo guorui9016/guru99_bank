@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import base.TestCaseTemplet;
+import base.TestCaseBase;
 import util.Util;
 
 public class TestNGListener implements ITestListener {
@@ -39,7 +39,7 @@ public class TestNGListener implements ITestListener {
         extentTest.get().fail(iTestResult.getThrowable());
         logger.error(methodName + "Failed");
         //get driver from test result
-        TestCaseTemplet currentClass = (TestCaseTemplet) iTestResult.getInstance();
+        TestCaseBase currentClass = (TestCaseBase) iTestResult.getInstance();
         WebDriver driver = currentClass.getDriver();
         String path = Util.screenShot(driver,methodName);
         extentTest.get().addScreenCaptureFromPath(path, methodName);

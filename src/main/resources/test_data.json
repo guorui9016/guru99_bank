@@ -1,6 +1,6 @@
 {
   "account": {
-    "userId": "mngr281660",
+    "userId": "mngr285667",
     "password": "@Test001"
   },
   "sm1_IncorrectOldPassword": {
@@ -75,5 +75,9 @@
       "deposit": "500000",
       "dateOfOpen": "2020-09-17"
     }
-  ]
+  ],
+  "sm16_FundTransfer": {
+    "amount": "500",
+    "description": "cash"
+  }
 }

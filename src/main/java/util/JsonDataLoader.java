@@ -173,4 +173,18 @@ public class JsonDataLoader {
         return jsonObject.get(key).getAsString();
     }
 
+    /**
+     * load test account from json file
+     * @return
+     */
+    public static String[] getTestAccouts() {
+        JsonArray data = JsonDataLoader.getDataArray("prepare_data");
+        String[] accountList = new String[2];
+        for (int i = 0; i < data.size(); i++) {
+            JsonObject object = (JsonObject) data.get(i);
+            String account = object.get("accountId").getAsString();
+            accountList[i] = account;
+        }
+        return accountList;
+    }
 }
