@@ -1,8 +1,8 @@
-# Guru99_Bank
+# Guru99_Bank <span style="color:red"> - Deprecated</span>.
+### It is old one auto testing framework I did in 2019.
+>
 This is an automated test project for guru99 bank demo using the page factory framework.
 
-**Notice**:
-    There is no relevant authority to access database and API, so this test can only involve black-box test.
 
 Test case:
 
@@ -75,3 +75,4 @@ Development environment:
               └─Manager             #Test case about Manager functions
 ```
  
+>
